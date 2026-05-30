@@ -5,7 +5,10 @@ on:
     - cron: '0 * * * *'
   workflow_dispatch:
 
-# Forces the runner to use Node 24 for the actions environment
+# 1. ADD THIS BLOCK TO GIVE WRITE PERMISSIONS
+permissions:
+  contents: write
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -15,12 +18,12 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5 # <-- Updated from v4 to v5
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v5 # <-- Updated from v4 to v5
+        uses: actions/setup-node@v5
         with:
-          node-version: 24 # <-- Updated from 18 to 24 (since 18 is deprecated)
+          node-version: 24
 
       - name: Install dependencies
         run: npm install
